@@ -13,8 +13,11 @@ sealed class Screen(val route: String) {
     }
 
     object Confirmacion : Screen("confirmacion/{medicoId}/{fecha}/{hora}") {
-        fun createRoute(medicoId: Int, fecha: String, hora: String): String =
-            "confirmacion/$medicoId/$fecha/$hora"
+        fun createRoute(medicoId: Int, fecha: String, hora: String): String {
+            val fechaEnc = android.net.Uri.encode(fecha)
+            val horaEnc = android.net.Uri.encode(hora)
+            return "confirmacion/$medicoId/$fechaEnc/$horaEnc"
+        }
     }
 
     object MisCitas : Screen("mis_citas")
